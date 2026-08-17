@@ -41,11 +41,32 @@
             </div>
         </div>
 
-        <!-- Grade Grid (Grades 1 - 5) -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- Grade Tabs Navigation -->
+        <div class="mb-8 border-b border-gray-300">
+            <div class="flex flex-wrap gap-2 sm:gap-4">
+                <button class="grade-tab active px-4 py-2 font-semibold text-blue-600 border-b-2 border-blue-600 hover:text-blue-700 transition" data-grade="1">
+                    Grade 1
+                </button>
+                <button class="grade-tab px-4 py-2 font-semibold text-gray-600 border-b-2 border-transparent hover:text-blue-600 transition" data-grade="2">
+                    Grade 2
+                </button>
+                <button class="grade-tab px-4 py-2 font-semibold text-gray-600 border-b-2 border-transparent hover:text-blue-600 transition" data-grade="3">
+                    Grade 3
+                </button>
+                <button class="grade-tab px-4 py-2 font-semibold text-gray-600 border-b-2 border-transparent hover:text-blue-600 transition" data-grade="4">
+                    Grade 4
+                </button>
+                <button class="grade-tab px-4 py-2 font-semibold text-gray-600 border-b-2 border-transparent hover:text-blue-600 transition" data-grade="5">
+                    Grade 5
+                </button>
+            </div>
+        </div>
+
+        <!-- Grade Content Container -->
+        <div class="grid grid-cols-1 gap-8">
 
             <!-- Grade 1 -->
-            <div class="bg-white rounded-xl shadow-md border border-gray-100 p-6">
+            <div id="grade-1" class="grade-content bg-white rounded-xl shadow-md border border-gray-100 p-6">
                 <div class="flex items-center justify-between mb-4 border-b pb-3">
                     <h2 class="text-xl font-bold text-gray-900">Grade 1</h2>
                     <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">Cycle 1</span>
@@ -161,7 +182,7 @@
             </div>
 
             <!-- Grade 2 -->
-            <div class="bg-white rounded-xl shadow-md border border-gray-100 p-6">
+            <div id="grade-2" class="grade-content hidden bg-white rounded-xl shadow-md border border-gray-100 p-6">
                 <div class="flex items-center justify-between mb-4 border-b pb-3">
                     <h2 class="text-xl font-bold text-gray-900">Grade 2</h2>
                     <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">Cycle 1</span>
@@ -286,7 +307,7 @@
             </div>
 
             <!-- Grade 3 -->
-            <div class="bg-white rounded-xl shadow-md border border-gray-100 p-6">
+            <div id="grade-3" class="grade-content hidden bg-white rounded-xl shadow-md border border-gray-100 p-6">
                 <div class="flex items-center justify-between mb-4 border-b pb-3">
                     <h2 class="text-xl font-bold text-gray-900">Grade 3</h2>
                     <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">Cycle 1</span>
@@ -410,7 +431,7 @@
             </div>
 
             <!-- Grade 4 -->
-            <div class="bg-white rounded-xl shadow-md border border-gray-100 p-6">
+            <div id="grade-4" class="grade-content hidden bg-white rounded-xl shadow-md border border-gray-100 p-6">
                 <div class="flex items-center justify-between mb-4 border-b pb-3">
                     <h2 class="text-xl font-bold text-gray-900">Grade 4</h2>
                     <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">Cycle 2</span>
@@ -546,7 +567,7 @@
             </div>
 
             <!-- Grade 5 -->
-            <div class="bg-white rounded-xl shadow-md border border-gray-100 p-6 lg:col-span-2 max-w-3xl mx-auto w-full">
+            <div id="grade-5" class="grade-content hidden bg-white rounded-xl shadow-md border border-gray-100 p-6">
                 <div class="flex items-center justify-between mb-4 border-b pb-3">
                     <h2 class="text-xl font-bold text-gray-900">Grade 5</h2>
                     <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">Cycle 2</span>
@@ -687,6 +708,36 @@
     <footer class="bg-white border-t border-gray-200 py-4 text-center text-sm text-gray-500 mt-12">
         <p>&copy; 2026 Tayba School. All rights reserved.</p>
     </footer>
+
+    <script>
+        // Tab switching functionality
+        const gradeTabs = document.querySelectorAll('.grade-tab');
+        const gradeContents = document.querySelectorAll('.grade-content');
+
+        gradeTabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                const gradeNumber = this.getAttribute('data-grade');
+                
+                // Hide all grade contents
+                gradeContents.forEach(content => {
+                    content.classList.add('hidden');
+                });
+                
+                // Remove active styling from all tabs
+                gradeTabs.forEach(t => {
+                    t.classList.remove('text-blue-600', 'border-blue-600');
+                    t.classList.add('text-gray-600', 'border-transparent');
+                });
+                
+                // Show the selected grade content
+                document.getElementById(`grade-${gradeNumber}`).classList.remove('hidden');
+                
+                // Add active styling to the clicked tab
+                this.classList.remove('text-gray-600', 'border-transparent');
+                this.classList.add('text-blue-600', 'border-blue-600');
+            });
+        });
+    </script>
 
 </body>
 </html>
